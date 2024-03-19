@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jobspot/Screens/Ecom.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddPost extends StatefulWidget {
@@ -38,6 +39,8 @@ class _AddPostState extends State<AddPost> {
 
   if (response.statusCode == 200) {
     print('Post Uploaded');
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const Ecom()));
   } else {
     print('Post Not Uploaded');
   }
@@ -99,79 +102,91 @@ class _AddPostState extends State<AddPost> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundImage:
-                      NetworkImage('http://10.0.2.2/flutter_login/upload/$pic'),
-                  radius: 25.0,
-                ),
-                const SizedBox(
-                  width: 20.0,
-                ),
-                Text(
-                  username,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 15.0),
-                ),
-              ],
-            ),
-            Container(
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  hintText: 'what is in your mind ...',
-                  border: InputBorder.none,
-                ),
-                validator: (val) {
-                  if (val!.isEmpty) {
-                    return 'Empty';
-                  }
-                  return null;
-                },
-                controller: topic,
-              ),
-            ),
-            Expanded(
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  hintText: 'what is in your mind ...',
-                  border: InputBorder.none,
-                ),
-                validator: (val) {
-                  if (val!.isEmpty) {
-                    return 'Empty';
-                  }
-                  return null;
-                },
-                controller: descrip,
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {
-                      choiceImage();
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.photo),
-                        SizedBox(
-                          width: 5.0,
-                        ),
-                        Text(
-                          'add photo',
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+  children: [
+    Row(
+      children: [
+        CircleAvatar(
+          backgroundImage: NetworkImage('http://10.0.2.2/flutter_login/upload/$pic'),
+          radius: 25.0,
         ),
+        const SizedBox(width: 20.0),
+        Text(
+          username,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
+        ),
+      ],
+    ),
+    Container(
+      child: TextFormField(
+        decoration: const InputDecoration(
+          hintText: 'TOPIC',
+          border: InputBorder.none,
+        ),
+        validator: (val) {
+          if (val!.isEmpty) {
+            return 'Empty';
+          }
+          return null;
+        },
+        controller: topic,
+      ),
+    ),
+    Expanded(
+      child: Stack(
+        children: [
+          TextFormField(
+            decoration: const InputDecoration(
+              hintText: 'DESCRIPTION',
+              border: InputBorder.none,
+            ),
+            maxLines: null, // กำหนด maxLines เป็น null เพื่อให้สามารถเพิ่มบรรทัดใหม่ได้
+            validator: (val) {
+              if (val!.isEmpty) {
+                return 'Empty';
+              }
+              return null;
+            },
+            controller: descrip,
+          ),
+        ],
+      ),
+    ),
+    if (_selectedImage != null)
+  Positioned(
+    right: 0,
+    bottom: 0,
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Image.file(
+        _selectedImage!,
+        width: 300,
+        height: 300,
+        fit: BoxFit.contain,
+      ),
+    ),
+  ),
+    Row(
+      children: [
+        Expanded(
+          child: TextButton(
+            onPressed: () {
+              choiceImage();
+            },
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.photo),
+                SizedBox(width: 5.0),
+                Text('add photo'),
+              ],
+            ),
+          ),
+        ),
+      ],
+    ),
+  ],
+),
+
       ),
     );
   }
