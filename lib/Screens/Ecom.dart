@@ -20,15 +20,15 @@ class _EcomState extends State<Ecom> {
   static Future<List<postModel>> getPost() async {
     final response = await http.get(Uri.parse('http://10.0.2.2/flutter_login/viewpost.php'));
     var data = json.decode(response.body);
-    late SharedPreferences pref;
-    pref = await SharedPreferences.getInstance();
+    // late SharedPreferences pref;
+    // pref = await SharedPreferences.getInstance();
 
-    var postid0 = (data[0]["post_id"]);
+    // var postid0 = (data[0]["post_id"]);
 
-    // ignore: avoid_print
-    print(postid0);
+    // // ignore: avoid_print
+    // print(postid0);
 
-    await pref.setString('postid', postid0);
+    // await pref.setString('postid', postid0);
 
 
     if (response.statusCode == 200) {
@@ -53,6 +53,7 @@ class _EcomState extends State<Ecom> {
           userId: user.userId,
           postId: user.postId,
           image: user.image,
+          userimage: user.image,
           topic: user.topic,
           descrip: user.descrip,
           onBackNavigate: () {
