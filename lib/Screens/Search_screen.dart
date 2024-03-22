@@ -1,13 +1,22 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:jobspot/Screens/Home.dart';
+import 'package:http/http.dart' as http;
+import 'package:jobspot/Screens/showRecipe.dart';
+import 'package:jobspot/model/ingredient.dart';
 
 void main() {
   runApp(const SearchScreen());
 }
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,45 +35,27 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  List<Map> categories = [
-    {"name": "ไข่", "isChecked": false},
-    {"name": "ไก่", "isChecked": false},
-    {"name": "หมู", "isChecked": false},
-    {"name": "กุ้ง", "isChecked": false},
-    {"name": "หมึก", "isChecked": false},
-    {"name": "ข้าว", "isChecked": false},
-    {"name": "น้ำมัน", "isChecked": false},
-    {"name": "ซุปก้อน", "isChecked": false},
-    {"name": "ซอส", "isChecked": false},
-    {"name": "ผักชี", "isChecked": false},
-    {"name": "ซีอิ้วดำ", "isChecked": false},
-    {"name": "ซีอิ้วขาว", "isChecked": false},
-    {"name": "น้ำปลา", "isChecked": false},
-    {"name": "พริก", "isChecked": false},
-    {"name": "มะนาว", "isChecked": false},
-    {"name": "น่ำตาล", "isChecked": false},
-    {"name": "หัวหอม", "isChecked": false},
-    {"name": "แครอท", "isChecked": false},
-    {"name": "แป้ง", "isChecked": false},
-    {"name": "กะหล่ำ", "isChecked": false},
-    {"name": "กะเพรา", "isChecked": false},
-    {"name": "กระเทียม", "isChecked": false},
-    {"name": "เกลือ", "isChecked": false},
-    {"name": "น้ำมันหอย", "isChecked": false},
-    {"name": "กะทิ", "isChecked": false},
-    {"name": "ข้าวโพด", "isChecked": false},
-    {"name": "เห็ด", "isChecked": false},
-    {"name": "ฟักทอง", "isChecked": false},
-    {"name": "ใบโหระพา", "isChecked": false},
-    {"name": "มะกรูด", "isChecked": false},
-    {"name": "มะขาม", "isChecked": false},
-    {"name": "ชะอม", "isChecked": false},
-    {"name": "ข่า", "isChecked": false},
-    {"name": "ตะไคร้", "isChecked": false},
-    {"name": "มะเขือ", "isChecked": false},
-    {"name": "มะเขือเทศ", "isChecked": false},
-    {"name": "ซอสหอยนางรม", "isChecked": false},
-  ];
+  late Future<List<Ingredient>> ingredientFuture;
+
+  List<String> selectedList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    ingredientFuture = getIngredient();
+  }
+
+  Future<List<Ingredient>> getIngredient() async {
+    final response = await http
+        .get(Uri.parse('http://10.0.2.2/flutter_login/ingredient.php'));
+
+    if (response.statusCode == 200) {
+      final List<dynamic> body = json.decode(utf8.decode(response.bodyBytes));
+      return body.map<Ingredient>((json) => Ingredient.fromJson(json)).toList();
+    } else {
+      throw Exception('โหลดรายการวัตถุดิบไม่สำเร็จ');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +63,10 @@ class _MainViewState extends State<MainView> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 250, 162, 53),
         title: const Column(
-          // ignore: sort_child_properties_last
-          children: [
-            Text('Home'),
-          ],
           mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('เลือกรายการวัตถุดิบ'),
+          ],
         ),
         centerTitle: true,
         leading: IconButton(
@@ -88,82 +78,69 @@ class _MainViewState extends State<MainView> {
           },
           icon: const Icon(Icons.arrow_back),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "เลือกวัตุดิบที่คุณมี:",
-                style: TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 10),
-              const Divider(),
-              const SizedBox(height: 10),
-              Column(
-                children: categories.map((favorite) {
-                  return CheckboxListTile(
-                    activeColor: const Color.fromARGB(255, 3, 4, 90),
-                    checkboxShape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    value: favorite["isChecked"],
-                    title: Text(favorite["name"]),
-                    onChanged: (val) {
-                      setState(() {
-                        favorite["isChecked"] = val;
-                      });
-                    },
-                  );
-                }).toList(),
-              ),
-              const SizedBox(height: 10),
-              const Divider(),
-              const SizedBox(height: 10),
-              Wrap(
-                children: categories.map((favorite) {
-                  if (favorite["isChecked"] == true) {
-                    return Card(
-                      elevation: 3,
-                      color: const Color.fromARGB(255, 3, 4, 90),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              favorite["name"],
-                              style: const TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  favorite["isChecked"] =
-                                      !favorite["isChecked"];
-                                });
-                              },
-                              child: const Icon(
-                                Icons.delete_forever_rounded,
-                                color: Color.fromARGB(255, 3, 4, 90),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }
-                  return Container();
-                }).toList(),
-              )
-            ],
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => showRecipe(selectedList:selectedList)),
+              );
+              print(selectedList);
+            },
+            icon: const Icon(Icons.check),
           ),
-        ),
+        ],
+      ),
+      body: FutureBuilder<List<Ingredient>>(
+        future: ingredientFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          } else if (snapshot.hasData) {
+            final ingredients = snapshot.data!;
+            return buildIngredients(ingredients);
+          } else {
+            return const Text('No user data');
+          }
+        },
+      ),
+    );
+  }
+
+  Widget buildIngredients(List<Ingredient> ingredients) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Wrap(
+        spacing: 8.0,
+        runSpacing: 8.0,
+        children: ingredients.map((ingredient) {
+          return Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: FilterChip(
+              label: Text(ingredient.ingredient_name),
+              selected: selectedList.contains(ingredient.ingredient_id),
+              onSelected: (bool value) {
+                setState(() {
+                  if (selectedList.contains(ingredient.ingredient_id)) {
+                    selectedList.remove(ingredient.ingredient_id);
+                  } else {
+                    if (selectedList.length < 5) {
+                      selectedList.add(ingredient.ingredient_id);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('เลือกวัคถุดิบสูงสุดได้ 5 อย่าง'),
+                        ),
+                      );
+                    }
+                  }
+                });
+              },
+            ),
+          );
+        }).toList(),
       ),
     );
   }
