@@ -100,11 +100,8 @@ class _NavBarState extends State<NavBar> {
             child: Column(children: [
               ListTile(
                 title: const Text(
-<<<<<<< HEAD
                   "ออกจากระบบ",
-=======
-                  "Sign Out",
->>>>>>> 7c1b0eec36a5b1f0c3ef2f2fedde96286294f070
+
                   textAlign: TextAlign.end,
                 ),
                 trailing: const Icon(Icons.subdirectory_arrow_right_sharp),

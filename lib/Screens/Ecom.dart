@@ -6,10 +6,7 @@ import 'package:jobspot/Screens/showpost.dart';
 import 'package:jobspot/Widgets/poest.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:http/http.dart' as http;
-<<<<<<< HEAD
-=======
-import 'package:shared_preferences/shared_preferences.dart';
->>>>>>> 7c1b0eec36a5b1f0c3ef2f2fedde96286294f070
+
 
 class Ecom extends StatefulWidget {
   const Ecom({super.key});
@@ -78,11 +75,9 @@ class _EcomState extends State<Ecom> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-<<<<<<< HEAD
+
           'โพสทั้งหมด',
-=======
-          'ร้านทั้งหมด',
->>>>>>> 7c1b0eec36a5b1f0c3ef2f2fedde96286294f070
+
         ),
         actions: [
           TextButton(
@@ -93,11 +88,9 @@ class _EcomState extends State<Ecom> {
                   type: PageTransitionType.rightToLeft, child: const AddPost()));
             },
             child: const Text(
-<<<<<<< HEAD
+
               'เพิ่มโพส',
-=======
-              'Post',
->>>>>>> 7c1b0eec36a5b1f0c3ef2f2fedde96286294f070
+
               style: TextStyle(
                 fontSize: 20.0,
               ),
