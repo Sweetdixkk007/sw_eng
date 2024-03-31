@@ -31,7 +31,11 @@ class _LoginState extends State<Login> {
     late SharedPreferences pref;
     pref = await SharedPreferences.getInstance();
 
+<<<<<<< HEAD
     var name0 = (data[0]["name"]);
+=======
+    var name0 = (data[0]["email"]);
+>>>>>>> 7c1b0eec36a5b1f0c3ef2f2fedde96286294f070
     var id0 = (data[0]["id"]);
     var image0 = (data[0]["image"]);
 

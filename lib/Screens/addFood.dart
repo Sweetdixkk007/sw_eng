@@ -42,7 +42,11 @@ class _addFoodState extends State<addFood> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
+<<<<<<< HEAD
           backgroundColor: const Color.fromARGB(255, 250, 162, 53),
+=======
+          backgroundColor: Colors.orange,
+>>>>>>> 7c1b0eec36a5b1f0c3ef2f2fedde96286294f070
           title: Text(
             'Add Food',
             style: GoogleFonts.anuphan(

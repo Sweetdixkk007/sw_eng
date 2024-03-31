@@ -80,7 +80,11 @@ class _AddPostState extends State<AddPost> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
+<<<<<<< HEAD
           'สร้างโพส',
+=======
+          'ฝากร้าน',
+>>>>>>> 7c1b0eec36a5b1f0c3ef2f2fedde96286294f070
         ),
         actions: [
           TextButton(
@@ -88,7 +92,11 @@ class _AddPostState extends State<AddPost> {
               add_post();
             },
             child: const Text(
+<<<<<<< HEAD
               'ยืนยัน',
+=======
+              'Post',
+>>>>>>> 7c1b0eec36a5b1f0c3ef2f2fedde96286294f070
               style: TextStyle(
                 fontSize: 20.0,
               ),
@@ -119,7 +127,11 @@ class _AddPostState extends State<AddPost> {
     Container(
       child: TextFormField(
         decoration: const InputDecoration(
+<<<<<<< HEAD
           hintText: 'หัวข้อ',
+=======
+          hintText: 'TOPIC',
+>>>>>>> 7c1b0eec36a5b1f0c3ef2f2fedde96286294f070
           border: InputBorder.none,
         ),
         validator: (val) {
@@ -136,7 +148,11 @@ class _AddPostState extends State<AddPost> {
         children: [
           TextFormField(
             decoration: const InputDecoration(
+<<<<<<< HEAD
               hintText: 'รายละเอียด',
+=======
+              hintText: 'DESCRIPTION',
+>>>>>>> 7c1b0eec36a5b1f0c3ef2f2fedde96286294f070
               border: InputBorder.none,
             ),
             maxLines: null, // กำหนด maxLines เป็น null เพื่อให้สามารถเพิ่มบรรทัดใหม่ได้
@@ -177,7 +193,11 @@ class _AddPostState extends State<AddPost> {
               children: [
                 Icon(Icons.photo),
                 SizedBox(width: 5.0),
+<<<<<<< HEAD
                 Text('แทรกรูปภาพ'),
+=======
+                Text('add photo'),
+>>>>>>> 7c1b0eec36a5b1f0c3ef2f2fedde96286294f070
               ],
             ),
           ),
