@@ -53,8 +53,16 @@ class instructionScreen extends StatelessWidget {
                 SizedBox(
                   height: 8,
                 ),
-                Row(
-                  crossAxisAlignment:
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 5.0,horizontal: 0),
+                  padding: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  
+                  child: Row(
+                    crossAxisAlignment:
                         CrossAxisAlignment.start,
                     children: [
                       Expanded(
@@ -64,6 +72,7 @@ class instructionScreen extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
                 ),
                 SizedBox(
                   height: 8,

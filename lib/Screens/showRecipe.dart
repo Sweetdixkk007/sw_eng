@@ -111,7 +111,6 @@ class _showRecipeState extends State<showRecipe> {
                             'http://192.168.1.50/flutter_login/upload/${recipe.food_img}'),
                       ),
                       title: Text(recipe.food_name),
-                      subtitle: Text(recipe.description),
                     ),
                   ],
                 ),
