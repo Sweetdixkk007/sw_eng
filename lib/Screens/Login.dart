@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
   TextEditingController email = TextEditingController();
   TextEditingController pass = TextEditingController();
   Future<void> sign_in() async {
-    var url = Uri.parse("http://10.0.2.2/flutter_login/login.php");
+    var url = Uri.parse("http://192.168.1.50/flutter_login/login.php");
     var response = await http
         .post(url, body: {'email': email.text, "password": pass.text});
     var data = json.decode(response.body);

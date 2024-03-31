@@ -58,7 +58,7 @@ class _InstructionScreenState extends State<instructionScreen> {
   Future<List<commentModel>> getIngredient(String userId, String postId) async {
     try {
       var request = http.MultipartRequest(
-          'POST', Uri.parse('http://10.0.2.2/flutter_login/showcomment.php'));
+          'POST', Uri.parse('http://192.168.1.50/flutter_login/showcomment.php'));
       request.fields['user_id'] = userId;
       request.fields['post_id'] = postId;
 
@@ -84,7 +84,7 @@ class _InstructionScreenState extends State<instructionScreen> {
   Future addComment() async {
     var postid = widget.postId;
 
-    var uri = Uri.parse("http://10.0.2.2/flutter_login/comment.php");
+    var uri = Uri.parse("http://192.168.1.50/flutter_login/comment.php");
     var request = http.MultipartRequest('POST', uri);
 
     request.fields['user_id'] = id;
@@ -127,7 +127,7 @@ class _InstructionScreenState extends State<instructionScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.network(
-                'http://10.0.2.2/flutter_login/upload/${widget.image}',
+                'http://192.168.1.50/flutter_login/upload/${widget.image}',
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -193,7 +193,7 @@ class _InstructionScreenState extends State<instructionScreen> {
                           .map((comment) => ListTile(
                                 leading: CircleAvatar(
                                   backgroundImage: NetworkImage(
-                                    'http://10.0.2.2/flutter_login/upload/${comment.userimage}',
+                                    'http://192.168.1.50/flutter_login/upload/${comment.userimage}',
                                   ),
                                 ),
                                 title: Text(comment.name),

@@ -23,7 +23,7 @@ class _AddPostState extends State<AddPost> {
   File? _selectedImage;
   // ignore: non_constant_identifier_names
   Future add_post() async {
-  var uri = Uri.parse("http://10.0.2.2/flutter_login/post.php");
+  var uri = Uri.parse("http://192.168.1.50/flutter_login/post.php");
   var request = http.MultipartRequest('POST', uri);
   var postimage = await http.MultipartFile.fromPath("image", _selectedImage!.path);
 
@@ -114,7 +114,7 @@ class _AddPostState extends State<AddPost> {
     Row(
       children: [
         CircleAvatar(
-          backgroundImage: NetworkImage('http://10.0.2.2/flutter_login/upload/$pic'),
+          backgroundImage: NetworkImage('http://192.168.1.50/flutter_login/upload/$pic'),
           radius: 25.0,
         ),
         const SizedBox(width: 20.0),

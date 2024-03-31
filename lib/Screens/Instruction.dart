@@ -36,7 +36,7 @@ class instructionScreen extends StatelessWidget {
             child: Column(
               children: [
                 Image.network(
-                  'http://10.0.2.2/flutter_login/upload/${foodImg}',
+                  'http://192.168.1.50/flutter_login/upload/${foodImg}',
                 ),
                 SizedBox(
                   height: 20,
@@ -54,10 +54,16 @@ class instructionScreen extends StatelessWidget {
                   height: 8,
                 ),
                 Row(
-                  children: [
-                    Text(description,
-                    style: TextStyle(fontSize: 16),),
-                  ],
+                  crossAxisAlignment:
+                        CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          description,
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                      ),
+                    ],
                 ),
                 SizedBox(
                   height: 8,
@@ -69,6 +75,7 @@ class instructionScreen extends StatelessWidget {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(10.0),
                   ),
+                  
                   child: Row(
                     crossAxisAlignment:
                         CrossAxisAlignment.start,

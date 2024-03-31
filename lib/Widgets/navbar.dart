@@ -67,7 +67,7 @@ class _NavBarState extends State<NavBar> {
           CircleAvatar(
             radius: 52,
             backgroundImage: NetworkImage(
-                'http://10.0.2.2/flutter_login/upload/$pic'),
+                'http://192.168.1.50/flutter_login/upload/$pic'),
           ),
           const SizedBox(
             height: 15,

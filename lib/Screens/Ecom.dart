@@ -21,7 +21,7 @@ class Ecom extends StatefulWidget {
 class _EcomState extends State<Ecom> {
   Future<List<postModel>> postFuture = getPost();
   static Future<List<postModel>> getPost() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2/flutter_login/viewpost.php'));
+    final response = await http.get(Uri.parse('http://192.168.1.50/flutter_login/viewpost.php'));
     var data = json.decode(response.body);
     // late SharedPreferences pref;
     // pref = await SharedPreferences.getInstance();

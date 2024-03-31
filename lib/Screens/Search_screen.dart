@@ -47,7 +47,7 @@ class _MainViewState extends State<MainView> {
 
   Future<List<Ingredient>> getIngredient() async {
     final response = await http
-        .get(Uri.parse('http://10.0.2.2/flutter_login/ingredient.php'));
+        .get(Uri.parse('http://192.168.1.50/flutter_login/ingredient.php'));
 
     if (response.statusCode == 200) {
       final List<dynamic> body = json.decode(utf8.decode(response.bodyBytes));

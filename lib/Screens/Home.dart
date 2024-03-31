@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<List<Food>> usersFuture = getFoods();
   static Future<List<Food>> getFoods() async {
     final response = await http
-        .get(Uri.parse('http://10.0.2.2/flutter_login/view_product.php'));
+        .get(Uri.parse('http://192.168.1.50/flutter_login/view_product.php'));
 
     if (response.statusCode == 200) {
       final List<dynamic> body = json.decode(utf8.decode(response.bodyBytes));
@@ -431,7 +431,7 @@ Widget buildFoods(List<Food> users) => ListView.builder(
                         ClipRRect(
                           borderRadius: BorderRadius.circular(16),
                           child: Image.network(
-                            'http://10.0.2.2/flutter_login/upload/${user.food_img}',
+                            'http://192.168.1.50/flutter_login/upload/${user.food_img}',
                             height: 200,
                             width: double.infinity,
                             fit: BoxFit.cover,

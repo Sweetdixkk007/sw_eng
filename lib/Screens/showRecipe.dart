@@ -64,7 +64,7 @@ class _showRecipeState extends State<showRecipe> {
       );
 
   Future<List<Food>> fetchRecipes() async {
-    final url = Uri.parse('http://10.0.2.2/flutter_login/recipe.php');
+    final url = Uri.parse('http://192.168.1.50/flutter_login/recipe.php');
     final response = await http.post(
       url,
       body: {'selectedIngredients': widget.selectedList.join(',')},
@@ -111,7 +111,7 @@ class _showRecipeState extends State<showRecipe> {
                     ListTile(
                       leading: CircleAvatar(
                         backgroundImage: NetworkImage(
-                            'http://10.0.2.2/flutter_login/upload/${recipe.food_img}'),
+                            'http://192.168.1.50/flutter_login/upload/${recipe.food_img}'),
                       ),
                       title: Text(recipe.food_name),
                       subtitle: Text(recipe.description),

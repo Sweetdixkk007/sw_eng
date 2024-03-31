@@ -30,7 +30,7 @@ class _RegisterState extends State<Register> {
   bool isLoading = false;
 
   Future sign_up() async {
-    var uri = Uri.parse("http://10.0.2.2/flutter_login/register.php");
+    var uri = Uri.parse("http://192.168.1.50/flutter_login/register.php");
     var request = http.MultipartRequest('POST', uri);
 
     // Add image file

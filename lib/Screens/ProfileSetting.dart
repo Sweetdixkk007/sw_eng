@@ -22,7 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
   
 
   Future uploadImage()async{
-    var uri = Uri.parse("http://10.0.2.2/flutter_login/register.php");
+    var uri = Uri.parse("http://192.168.1.50/flutter_login/register.php");
     var request =  http.MultipartRequest('POST',uri);
     var pic = await http.MultipartFile.fromPath("image", _selectedImage!.path);
     request.files.add(pic);
