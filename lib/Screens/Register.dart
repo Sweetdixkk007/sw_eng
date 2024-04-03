@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jobspot/Screens/Login.dart';
 import 'package:jobspot/Screens/registersuccess.dart';
 
 class Register extends StatefulWidget {
@@ -291,7 +292,11 @@ class _RegisterState extends State<Register> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Login()),
+                        );
                         },
                         child: Text(
                           "Sign In",

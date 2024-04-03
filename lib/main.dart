@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobspot/Screens/SecondSplash.dart';
 import 'package:jobspot/Screens/Splash.dart';
 import 'package:jobspot/Widgets/checklogin.dart';
 
@@ -19,7 +20,7 @@ class _JobSpotState extends State<JobSpot> {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       
-      home: check_login(),
+      home: SecondSplash(),
 
     );
   }

@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jobspot/Screens/Ecom.dart';
 import 'package:jobspot/Screens/Instruction.dart';
+import 'package:jobspot/Screens/Register.dart';
 import 'package:jobspot/Screens/Search_screen.dart';
 import 'package:jobspot/Widgets/navbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:jobspot/Screens/addFood.dart';
 import 'package:jobspot/model/food.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -25,6 +27,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late SharedPreferences pref;
+  late String username = "";
+  late String id = "";
+  String pic = "";
+
+  Future<void> dud() async {
+    pref = await SharedPreferences.getInstance();
+
+    setState(() {
+      username = pref.getString('username').toString();
+      pic = pref.getString('pic').toString();
+    });
+  }
   var currentButtonState = 0;
   Future<List<Food>> usersFuture = getFoods();
   static Future<List<Food>> getFoods() async {
@@ -47,6 +62,12 @@ class _HomeScreenState extends State<HomeScreen> {
         currentButtonState = 0;
       }
     });
+  }
+  
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dud();
   }
 
   @override
@@ -272,10 +293,43 @@ Widget buildFoods(List<Food> users) => ListView.builder(
                     color: Colors.transparent,
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Ecom()),
-                        );
+                         print(username);
+                                if (username == 'Guest') {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Text('Guest User'),
+                                      content: Text(
+                                          'ฟังก์ชั่นนี้ มีไว้สำหรับผู้ที่ลงทะเบียน คุณต้องการจะลงทะเบียนไหม'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const Register(),
+                                              ),
+                                            );
+                                          },
+                                          child: Text('ใช่'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text('ไม่'),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                } else {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Ecom()),
+                                  );
+                                }
                       },
                       borderRadius: BorderRadius.circular(16),
                       child: Container(
