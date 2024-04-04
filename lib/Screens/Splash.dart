@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:jobspot/Screens/Home.dart';
 import 'package:jobspot/Screens/SecondSplash.dart';
+import 'package:jobspot/Widgets/user.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -16,11 +18,15 @@ class _SplashState extends State<Splash> {
     // TODO: implement initState
     super.initState();
 
-    Timer(const Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 3), () async {bool? signin = await User.getsignin();;
+      if (signin == false || signin == null){
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) {
         return const SecondSplash();
-      }));
+      }));}
+      else if(signin == true){
+        Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const HomeScreen()));}
     });
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jobspot/Screens/SecondSplash.dart';
+import 'package:jobspot/Screens/Splash.dart';
 
 void main() {
   runApp(const JobSpot());
@@ -18,7 +18,7 @@ class _JobSpotState extends State<JobSpot> {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       
-      home: SecondSplash(),
+      home: Splash(),
 
     );
   }

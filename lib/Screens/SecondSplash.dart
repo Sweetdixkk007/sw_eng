@@ -42,7 +42,7 @@ class _SecondSplashState extends State<SecondSplash> {
               width: MediaQuery.of(context).size.width * 0.8,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/sp.png"),
+                  image: AssetImage("lib/assets/sp.png"),
                   filterQuality: FilterQuality.high,
                 ),
               ),
