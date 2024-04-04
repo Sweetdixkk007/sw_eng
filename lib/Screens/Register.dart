@@ -268,46 +268,6 @@ void attemptSignUp() async {
                   const SizedBox(
                     height: 15,
                   ),
-                  SizedBox(
-                    width: 350,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.03,
-                          child: Row(children: [
-                            Transform.scale(
-                              scale: 0.7,
-                              child: Checkbox(
-                                value: isChecked,
-                                activeColor:
-                                    const Color.fromARGB(255, 3, 4, 90),
-                                onChanged: (newBool) {
-                                  setState(() {
-                                    isChecked = newBool;
-                                  });
-                                },
-                                side: const BorderSide(
-                                  color: Color.fromARGB(103, 3, 4, 90),
-                                  width: 1,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 0,
-                            ),
-                            Text(
-                              "Remember me",
-                              style: GoogleFonts.dmSans(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w300,
-                                  color: const Color.fromARGB(150, 3, 4, 90)),
-                            ),
-                          ]),
-                        ),
-                      ],
-                    ),
-                  ),
                   const SizedBox(
                     height: 20,
                   ),
