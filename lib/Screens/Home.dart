@@ -90,11 +90,44 @@ class _HomeScreenState extends State<HomeScreen> {
       actions: [
         IconButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const addFood()),
-            );
-          },
+                         print(username);
+                                if (username == 'Guest') {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Text('Guest User'),
+                                      content: Text(
+                                          'ฟังก์ชั่นนี้ มีไว้สำหรับผู้ที่ลงทะเบียน คุณต้องการจะลงทะเบียนไหม'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const Register(),
+                                              ),
+                                            );
+                                          },
+                                          child: Text('ใช่'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text('ไม่'),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                } else {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const addFood()),
+                                  );
+                                }
+                      },
           icon: const Icon(Icons.add),
         ),
       ],

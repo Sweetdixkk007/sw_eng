@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -46,15 +47,65 @@ class _RegisterState extends State<Register> {
     var response = await request.send();
 
     if (response.statusCode == 200) {
-      print('Image Uploaded');
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => AlertDialogExampleApp()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => AlertDialogExampleApp()));
     } else {
-      print('Image Not Uploaded');
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => Register()));
     }
   }
+
+Future<bool> checkDuplicate() async {
+  var uri = Uri.parse("http://192.168.1.50/flutter_login/check_duplicate.php");
+  var request = http.MultipartRequest('POST', uri);
+  request.fields['email'] = email.text;
+  request.fields['name'] = name.text;
+
+  var response = await request.send();
+
+  if (response.statusCode == 200) {
+    var jsonResponse = await response.stream.bytesToString();
+    var result = json.decode(jsonResponse);
+    if (result['error'] == true) {
+      // Display error message
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("เกิดข้อผิดพลาด"),
+            content: Text("ชื่อผู้ใช้หรืออีเมลถูกใช้แล้ว"),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+      return false;
+    } else {
+      // No duplicates, proceed with sign up
+      return true;
+    }
+  } else {
+    // Error in API call
+    print('Error checking duplicate');
+    return false;
+  }
+}
+
+void attemptSignUp() async {
+  bool isDuplicate = await checkDuplicate();
+
+  if (isDuplicate) {
+    // No duplicates, proceed with sign up
+    sign_up();
+  }
+}
+
 
   Future choiceImage() async {
     final returnedImage =
@@ -64,6 +115,15 @@ class _RegisterState extends State<Register> {
       _selectedImage = File(returnedImage.path);
     });
   }
+
+
+
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -263,7 +323,7 @@ class _RegisterState extends State<Register> {
                         bool pass = formKey.currentState!.validate();
 
                         if (pass) {
-                          sign_up();
+                          attemptSignUp();
                         }
                       },
                       child: const Text(
@@ -293,10 +353,9 @@ class _RegisterState extends State<Register> {
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Login()),
-                        );
+                            context,
+                            MaterialPageRoute(builder: (context) => Login()),
+                          );
                         },
                         child: Text(
                           "Sign In",

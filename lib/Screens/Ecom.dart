@@ -19,16 +19,6 @@ class _EcomState extends State<Ecom> {
   Future<List<postModel>> postFuture = getPost();
   static Future<List<postModel>> getPost() async {
     final response = await http.get(Uri.parse('http://192.168.1.50/flutter_login/viewpost.php'));
-    var data = json.decode(response.body);
-    // late SharedPreferences pref;
-    // pref = await SharedPreferences.getInstance();
-
-    // var postid0 = (data[0]["post_id"]);
-
-    // // ignore: avoid_print
-    // print(postid0);
-
-    // await pref.setString('postid', postid0);
 
 
     if (response.statusCode == 200) {

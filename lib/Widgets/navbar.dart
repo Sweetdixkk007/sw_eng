@@ -1,8 +1,11 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jobspot/Screens/Ecom.dart';
 import 'package:jobspot/Screens/Login.dart';
 import 'package:jobspot/Screens/ProfileSetting.dart';
+import 'package:jobspot/Screens/SecondSplash.dart';
 import 'package:jobspot/Widgets/user.dart';
 import 'package:page_transition/page_transition.dart';
 import 'dart:async';
@@ -40,7 +43,7 @@ class _NavBarState extends State<NavBar> {
     await User.setsignin(false);
     id = "";
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const Login()));
+        context, MaterialPageRoute(builder: (context) => const SecondSplash()));
   }
 
   @override

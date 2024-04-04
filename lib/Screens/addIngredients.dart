@@ -63,6 +63,7 @@ class _addIngrState extends State<addIngr> {
 
     var response = await request.send();
 
+    // ignore: use_build_context_synchronously
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => HomeScreen()),

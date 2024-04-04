@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jobspot/Screens/SecondSplash.dart';
-import 'package:jobspot/Screens/Splash.dart';
-import 'package:jobspot/Widgets/checklogin.dart';
 
 void main() {
   runApp(const JobSpot());
