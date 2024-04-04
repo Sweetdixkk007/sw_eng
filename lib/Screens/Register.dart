@@ -218,6 +218,8 @@ void attemptSignUp() async {
                       validator: (val) {
                         if (val!.isEmpty) {
                           return 'Empty';
+                        } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(val)) {
+                          return 'Invalid email format';
                         }
                         return null;
                       },
